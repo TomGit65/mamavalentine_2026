@@ -204,3 +204,4 @@ body{
   .bears{ width: 230px; }
   .ask-card{ width: 520px; }
 }
+.pop{ z-index: 2; }
