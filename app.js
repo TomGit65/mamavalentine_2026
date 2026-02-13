@@ -13,9 +13,9 @@ const mouthSad = document.getElementById("mouthSad");
 const tear = document.getElementById("tear");
 const scene = document.getElementById("scene");
 
-function setSad(on){
+function setSad(on) {
   scene.classList.toggle("sad", on);
-  if(on){
+  if (on) {
     mouthHappy.style.display = "none";
     mouthSad.style.display = "block";
     tear.style.display = "block";
@@ -26,12 +26,12 @@ function setSad(on){
   }
 }
 
-function unlockPage(){
+function unlockPage() {
   gate.style.display = "none";
   page.setAttribute("aria-hidden", "false");
 }
 
-function fail(){
+function fail() {
   err.textContent = "Wrong password 💔";
   gateCard.classList.remove("shake");
   void gateCard.offsetWidth;
@@ -44,28 +44,34 @@ unlock.addEventListener("click", () => {
   if ((pw.value || "").trim() === PASSWORD) unlockPage();
   else fail();
 });
+
 pw.addEventListener("keydown", (e) => {
-  if (e.key === "Enter"){ e.preventDefault(); unlock.click(); }
+  if (e.key === "Enter") {
+    e.preventDefault();
+    unlock.click();
+  }
 });
+
 setTimeout(() => pw.focus(), 120);
 
 // ===== Emoji rain (hearts -> cry after 3 NO clicks) =====
 const rain = document.getElementById("rain");
 let rainMode = "hearts"; // "hearts" | "cry"
-const HEARTS = ["💗","💖","💞","💕","💘"];
-const CRY = ["😭","😭","😭"];
+const HEARTS = ["💗", "💖", "💞", "💕", "💘"];
+const CRY = ["😭", "😭", "😭"];
 
-function spawnDrop(){
+function spawnDrop() {
   const d = document.createElement("div");
   d.className = "drop";
 
-  const emoji = (rainMode === "cry")
-    ? CRY[Math.floor(Math.random() * CRY.length)]
-    : HEARTS[Math.floor(Math.random() * HEARTS.length)];
+  const emoji =
+    rainMode === "cry"
+      ? CRY[Math.floor(Math.random() * CRY.length)]
+      : HEARTS[Math.floor(Math.random() * HEARTS.length)];
 
   d.textContent = emoji;
-  d.style.left = (Math.random() * 100) + "vw";
-  d.style.fontSize = (14 + Math.random() * 22) + "px";
+  d.style.left = Math.random() * 100 + "vw";
+  d.style.fontSize = 14 + Math.random() * 22 + "px";
   const dur = 3.8 + Math.random() * 3.8;
   d.style.animationDuration = dur + "s";
   d.style.opacity = (0.4 + Math.random() * 0.5).toFixed(2);
@@ -80,7 +86,7 @@ const chaos = document.getElementById("chaos");
 const hint = document.getElementById("hint");
 const noMain = document.getElementById("noMain");
 
-// Put your file names here (same folder)
+// ✅ EXACT filenames from your GitHub repo
 const sadImages = [
   "sadcat.jpeg",
   "sad-guy-crying-guy.gif",
@@ -89,7 +95,7 @@ const sadImages = [
   "sadman.jpeg",
   "sad-man-tik-tok-meme.gif",
   "hang.jpeg",
-  "frog.jpeg"
+  "frog.jpeg",
 ];
 
 const noMessages = [
@@ -98,21 +104,22 @@ const noMessages = [
   "Pleaseee 😭",
   "Don’t do this 💔",
   "Last chance… 🥹",
-  "Okay okay 😔"
+  "Okay okay 😔",
 ];
 
 let noCount = 0;
 
 // keep within screen
-function randPos(elW, elH){
+function randPos(elW, elH) {
   const pad = 10;
   const w = window.innerWidth;
   const h = window.innerHeight;
-  const x = pad + Math.random() * Math.max(pad, (w - elW - pad));
-  const y = pad + Math.random() * Math.max(pad, (h - elH - pad));
+  const x = pad + Math.random() * Math.max(pad, w - elW - pad);
+  const y = pad + Math.random() * Math.max(pad, h - elH - pad);
   return { x, y };
 }
-function popImage(){
+
+function popImage() {
   const img = document.createElement("img");
   img.className = "pop";
   img.alt = "";
@@ -120,22 +127,24 @@ function popImage(){
   const src = sadImages[Math.floor(Math.random() * sadImages.length)];
   img.src = src;
 
-  // place immediately
+  // place immediately (so cached loads still show correctly)
   const firstPos = randPos(170, 170);
   img.style.left = firstPos.x + "px";
-  img.style.top  = firstPos.y + "px";
+  img.style.top = firstPos.y + "px";
 
   chaos.appendChild(img);
 
+  // adjust after load (real size)
   img.addEventListener("load", () => {
     const rect = img.getBoundingClientRect();
     const w = rect.width || 170;
     const h = rect.height || 170;
     const { x, y } = randPos(w, h);
     img.style.left = x + "px";
-    img.style.top  = y + "px";
+    img.style.top = y + "px";
   });
 
+  // if missing file, remove it (prevents “invisible” items)
   img.addEventListener("error", () => {
     console.log("Image not found:", src);
     img.remove();
@@ -144,14 +153,14 @@ function popImage(){
   setTimeout(() => img.remove(), 8000);
 }
 
-function popNoButton(){
+function popNoButton() {
   const b = document.createElement("button");
   b.type = "button";
   b.className = "pop no-btn";
   b.textContent = "NO";
   chaos.appendChild(b);
 
-  const {x,y} = randPos(120, 50);
+  const { x, y } = randPos(120, 50);
   b.style.left = x + "px";
   b.style.top = y + "px";
 
@@ -164,17 +173,17 @@ function popNoButton(){
   setTimeout(() => b.remove(), 9000);
 }
 
-function growYes(level){
+function growYes(level) {
   const yesBtn = document.querySelector(".yes");
   const l = Math.min(8, level);
-  yesBtn.style.minWidth = (140 + l * 26) + "px";
-  yesBtn.style.fontSize = (16 + l * 2) + "px";
-  yesBtn.style.padding = (12 + l * 3) + "px " + (18 + l * 3) + "px";
+  yesBtn.style.minWidth = 140 + l * 26 + "px";
+  yesBtn.style.fontSize = 16 + l * 2 + "px";
+  yesBtn.style.padding = 12 + l * 3 + "px " + (18 + l * 3) + "px";
 }
 
-// ===== NO ESCAPE logic =====
-function moveNoMain(mode = "random"){
-  // ensures it stays tappable on phones
+// ===== NO ESCAPE logic (ONLY AFTER CLICK) =====
+function moveNoMain(mode = "random") {
+  // ensure it stays tappable on phones
   noMain.style.minWidth = "140px";
   noMain.style.minHeight = "48px";
 
@@ -189,30 +198,32 @@ function moveNoMain(mode = "random"){
 
   if (mode === "corner") {
     const corners = [
-      {x: 10, y: 10},
-      {x: window.innerWidth - w - 10, y: 10},
-      {x: 10, y: window.innerHeight - h - 10},
-      {x: window.innerWidth - w - 10, y: window.innerHeight - h - 10},
+      { x: 10, y: 10 },
+      { x: window.innerWidth - w - 10, y: 10 },
+      { x: 10, y: window.innerHeight - h - 10 },
+      { x: window.innerWidth - w - 10, y: window.innerHeight - h - 10 },
     ];
     const c = corners[Math.floor(Math.random() * corners.length)];
-    x = c.x; y = c.y;
+    x = c.x;
+    y = c.y;
   } else {
     const pos = randPos(w, h);
-    x = pos.x; y = pos.y;
+    x = pos.x;
+    y = pos.y;
   }
 
   noMain.style.left = x + "px";
   noMain.style.top = y + "px";
 }
 
-function maybeMultiplyNo(){
+function maybeMultiplyNo() {
   // after each click, spawn extra NO buttons sometimes
   const chance = Math.min(0.75, 0.25 + noCount * 0.08);
   if (Math.random() < chance) popNoButton();
   if (noCount >= 4 && Math.random() < 0.35) popNoButton();
 }
 
-function advanceNo(){
+function advanceNo() {
   noCount++;
   setSad(true);
 
@@ -221,12 +232,12 @@ function advanceNo(){
   // after 3 NO clicks -> cry rain
   if (noCount >= 3) rainMode = "cry";
 
-  // random sad images
+  // ✅ random sad images after each NO click
   popImage();
-  if (noCount >= 2) popImage();
+  if (noCount >= 2) popImage(); // from 2nd click onward, show 2 images
 
-  // move the main NO away every time (escape!)
-  const mode = (noCount >= 3 && Math.random() < 0.45) ? "corner" : "random";
+  // ✅ move the main NO away AFTER clicking only
+  const mode = noCount >= 3 && Math.random() < 0.45 ? "corner" : "random";
   moveNoMain(mode);
 
   // multiply NO buttons
@@ -236,20 +247,12 @@ function advanceNo(){
   growYes(noCount);
 }
 
-// Make the NO button escape even before clicking (hover/touch)
-noMain.addEventListener("mouseenter", () => {
-  if (noCount >= 1) moveNoMain("random");
-});
-noMain.addEventListener("touchstart", () => {
-  if (noCount >= 1) moveNoMain("random");
-}, {passive:true});
-
-// Main NO click: advance + then escape
+// ✅ NO button works normally until clicked
 noMain.addEventListener("click", () => {
   advanceNo();
 });
 
-// On first unlock, keep NO in normal place until first click
+// keep it inside screen on resize (only matters after it starts moving)
 window.addEventListener("resize", () => {
   if (noCount >= 1) moveNoMain("random");
 });
