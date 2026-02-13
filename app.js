@@ -112,21 +112,34 @@ function randPos(elW, elH){
   const y = pad + Math.random() * Math.max(pad, (h - elH - pad));
   return { x, y };
 }
-
 function popImage(){
   const img = document.createElement("img");
   img.className = "pop";
   img.alt = "";
-  img.src = sadImages[Math.floor(Math.random() * sadImages.length)];
+
+  const src = sadImages[Math.floor(Math.random() * sadImages.length)];
+  img.src = src;
+
+  // place immediately
+  const firstPos = randPos(170, 170);
+  img.style.left = firstPos.x + "px";
+  img.style.top  = firstPos.y + "px";
+
   chaos.appendChild(img);
 
-  img.onload = () => {
-    const rectW = img.getBoundingClientRect().width || 160;
-    const rectH = img.getBoundingClientRect().height || 160;
-    const {x,y} = randPos(rectW, rectH);
+  img.addEventListener("load", () => {
+    const rect = img.getBoundingClientRect();
+    const w = rect.width || 170;
+    const h = rect.height || 170;
+    const { x, y } = randPos(w, h);
     img.style.left = x + "px";
-    img.style.top = y + "px";
-  };
+    img.style.top  = y + "px";
+  });
+
+  img.addEventListener("error", () => {
+    console.log("Image not found:", src);
+    img.remove();
+  });
 
   setTimeout(() => img.remove(), 8000);
 }
