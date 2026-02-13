@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mg’s Pututulay 💖</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Emoji Rain -->
+  <div class="rain" id="rain" aria-hidden="true"></div>
+
+  <!-- Password Gate -->
+  <div class="gate" id="gate">
+    <div class="gate-card" id="gateCard">
+      <div class="gate-badge">🔒 Private</div>
+      <h1 class="gate-title">Enter Password</h1>
+      <p class="gate-sub">Only for someone special 💗</p>
+
+      <input id="pw" class="gate-input" type="password" inputmode="numeric" placeholder="••••••" />
+      <button id="unlock" class="gate-btn">Unlock</button>
+      <p id="err" class="gate-err"></p>
+    </div>
+  </div>
+
+  <!-- Chaos Layer (random popups) -->
+  <div class="chaos" id="chaos" aria-hidden="true"></div>
+
+  <!-- Main -->
+  <main class="page" id="page" aria-hidden="true">
+    <section class="ask-card" id="scene">
+
+      <!-- Bears -->
+      <svg class="bears" viewBox="0 0 260 170" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <text x="40" y="40" font-size="22">💖</text>
+        <text x="205" y="38" font-size="22">💗</text>
+
+        <circle cx="95" cy="72" r="34" fill="#fff" stroke="#2d2d2d" stroke-width="4"/>
+        <circle cx="70" cy="50" r="14" fill="#fff" stroke="#2d2d2d" stroke-width="4"/>
+        <circle cx="120" cy="50" r="14" fill="#fff" stroke="#2d2d2d" stroke-width="4"/>
+        <circle cx="85" cy="70" r="4" fill="#2d2d2d"/>
+        <circle cx="105" cy="70" r="4" fill="#2d2d2d"/>
+        <circle cx="78" cy="82" r="6" fill="#ffb3c1" opacity="0.9"/>
+        <circle cx="112" cy="82" r="6" fill="#ffb3c1" opacity="0.9"/>
+        <path d="M95 78c-8 0-13 4-13 9 0 6 6 10 13 10s13-4 13-10c0-5-5-9-13-9Z"
+              fill="#ffb3c1" stroke="#2d2d2d" stroke-width="4"/>
+
+        <circle cx="165" cy="72" r="34" fill="#fff" stroke="#2d2d2d" stroke-width="4"/>
+        <circle cx="140" cy="50" r="14" fill="#fff" stroke="#2d2d2d" stroke-width="4"/>
+        <circle cx="190" cy="50" r="14" fill="#fff" stroke="#2d2d2d" stroke-width="4"/>
+        <circle cx="155" cy="70" r="4" fill="#2d2d2d"/>
+        <circle cx="175" cy="70" r="4" fill="#2d2d2d"/>
+        <circle cx="148" cy="82" r="6" fill="#ffb3c1" opacity="0.9"/>
+        <circle cx="182" cy="82" r="6" fill="#ffb3c1" opacity="0.9"/>
+
+        <!-- happy mouth -->
+        <path id="mouthHappy" d="M165 83c-10 2-10 14 0 16 10-2 10-14 0-16Z"
+              fill="#ffb3c1" stroke="#2d2d2d" stroke-width="4"/>
+        <!-- sad mouth -->
+        <path id="mouthSad" d="M153 102c6-9 18-9 24 0"
+              stroke="#2d2d2d" stroke-width="4" stroke-linecap="round"
+              style="display:none"/>
+        <!-- tear -->
+        <path id="tear" d="M186 83c7 9-2 16-7 21-5-5-14-12-7-21 4-6 10-6 14 0Z"
+              fill="#8bd3ff" opacity="0.9" style="display:none"/>
+
+        <rect x="64" y="98" width="62" height="56" rx="28" fill="#fff" stroke="#2d2d2d" stroke-width="4"/>
+        <rect x="134" y="98" width="62" height="56" rx="28" fill="#fff" stroke="#2d2d2d" stroke-width="4"/>
+        <path d="M110 122c20-16 34-16 54 0" stroke="#2d2d2d" stroke-width="4" stroke-linecap="round"/>
+        <path d="M120 92c14-12 24-12 40 0" stroke="#2d2d2d" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+
+      <div class="headline">Mg’s Pututulay 💖</div>
+
+      <p class="ask-text" id="askText">
+        <span class="hi">HI Bae&lt;3</span><br>
+        Will you be my Valentine?
+      </p>
+
+      <div class="btn-row">
+        <a class="btn yes" href="yes.html" id="yesLink">Yes</a>
+        <button class="btn no" id="noMain">No</button>
+      </div>
+
+      <div class="hint" id="hint"></div>
+    </section>
+
+    
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
